@@ -1,6 +1,7 @@
-from validaciones import validar_nombres_candidatos, validar_nota_primer_parcial, validar_nota_segundo_parcial  
+from validaciones import validar_nombres_candidatos, ingresar_y_validar_numero_candidatos, validar_nombres_candidatos, validar_nota
 
-def crear_listas(numero):
+
+def crear_listas_nombres(numero):
 #pedir numero de candidatos
 
     for i in range(numero):
@@ -20,75 +21,64 @@ def crear_listas(numero):
 
 
 
+def crear_lista(): #esto ya esta
+
+    numero = ingresar_y_validar_numero_candidatos()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def crear_lista_nombres(numero):
     lista_nombres = [""] * numero
-    return lista_nombres
-
-
-def crear_lista_notas_primer_parcial(numero):
     lista_notas_primer_parcial = [0] * numero
-    return lista_notas_primer_parcial
-
-
-def crear_lista_notas_segundo_parcial(numero):
     lista_notas_segundo_parcial = [0] * numero
-    return lista_notas_segundo_parcial
+
+    print(lista_nombres)
+    print(lista_notas_primer_parcial)
+    print(lista_notas_segundo_parcial)
+
+    return lista_nombres, lista_notas_primer_parcial, lista_notas_segundo_parcial
 
 
 
-def ingresar_nombre_candidato(nombres, numero):
-    """
-    Solicita al usuario el nombre de cada candidato y lo almacena
-    en la lista de nombres recibida.
+def ingresar_nombre_candidato(nombres, numero): #esto ya esta, tenes que ver que cuando pones l no te indica "nombre invalido"
 
-    Args:
-        nombres (list): Lista donde se guardarán los nombres.
-        numero (int): Cantidad de candidatos cuyos nombres se ingresarán.
-
-    Returns:
-        list: La lista con los nombres ingresados.
-    """
     for i in range(numero):
-        nombres[i] = input("Ingrese el nombre del candidato: ")
+
+        nombre = input("Ingrese el nombre del candidato: ")
+
+        while not validar_nombres_candidatos(nombre):
+            print("Nombre inválido. Intente nuevamente.")
+            nombre = input("Ingrese el nombre del candidato: ")
+
+    nombres[i] = nombre
 
     return nombres
 
 
 
-def calcular_promedio(lista_notas_primer_parcial, lista_notas_segundo_parcial, numero):
-    """
-    Calcula el promedio de los dos parciales de cada candidato
-    y almacena los resultados en una nueva lista.
+def ingresar_notas(lista_notas_prueba_tecnica, lista_notas_prueba_psicotecnica, numero):
 
-    Args:
-        lista_notas_primer_parcial (list): Notas del primer parcial.
-        lista_notas_segundo_parcial (list): Notas del segundo parcial.
-        numero (int): Cantidad de candidatos.
+    for i in range(numero):
 
-    Returns:
-        list: Lista con los promedios de todos los candidatos.
-    """
+        nota_prueba_tecnica = int(input("Ingrese la nota de la prueba tecnica: "))
+
+        while not validar_nota(nota_prueba_tecnica):
+            print("Nota inválida. Debe ingresar un valor entre 0 y 10.")
+            nota_prueba_tecnica = int(input("Ingrese la nota de la prueba tecnica: "))
+
+        lista_notas_prueba_tecnica[i] = nota_prueba_tecnica
+
+        nota_prueba_psicotecnica = int(input("Ingrese la nota de la prueba psicotecnica: "))
+
+        while not validar_nota(nota_prueba_psicotecnica):
+            print("Nota inválida. Debe ingresar un valor entre 0 y 10.")
+            nota_prueba_psicotecnica = int(input("Ingrese la nota de la prueba psicotecnica: "))
+
+        lista_notas_prueba_psicotecnica[i] = nota_prueba_psicotecnica
+
+    return lista_notas_prueba_tecnica, lista_notas_prueba_psicotecnica
+
+
+
+def calcular_promedio(lista_notas_prueba_tecnica, lista_notas_prueba_psicotecnica, numero):
     lista_promedio = [0] * numero
 
     for i in range(numero):

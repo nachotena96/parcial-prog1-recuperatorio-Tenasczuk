@@ -1,4 +1,5 @@
 from validaciones import validar_menu
+from procesamiento import crear_lista, ingresar_nombre_candidato, ingresar_notas
 
 def main() -> None:
     """Función principal que gestiona el menú interactivo del sistema escolar."""
@@ -25,7 +26,11 @@ def main() -> None:
 
         match opcion:
             case 1:
-                numero = int(input("Ingrese el numero de candidatos que desee: "))
+                nombres, nota_prueba_tecnica, nota_prueba_psicotecnica = crear_lista()
+
+                nombres = ingresar_nombre_candidato(nombres, len(nombres))
+
+                nota_prueba_tecnica, nota_prueba_psicotecnica = ingresar_notas(nota_prueba_tecnica, nota_prueba_psicotecnica, len(nombres))
 
 
 if __name__ == "__main__":
