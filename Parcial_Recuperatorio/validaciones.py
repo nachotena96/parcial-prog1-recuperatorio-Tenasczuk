@@ -1,15 +1,7 @@
 def validar_menu(numero):
-    """
-    Valida que la opción ingresada para el menú esté dentro del rango permitido.
-    Si el número es menor que 0 o mayor que 6, vuelve a solicitarlo
-    hasta que sea válido.
 
-    Args:
-        numero (int): Opción ingresada por el usuario.
+    numero = int(input("Ingrese la opción del menú que desee: "))
 
-    Returns:
-        int: La opción validada, entre 0 y 6.
-    """
     while numero < 0 or numero > 6:
         print("El valor ingresado es inválido. Debe utilizar un número entre 0 y 6. Vuelva a intentarlo.")
         numero = int(input("Ingrese la opción del menú que desee: "))
@@ -18,46 +10,46 @@ def validar_menu(numero):
 
 
 
-def ingresar_numero_alumnos():
+def ingresar_numero_candidatos():
     """
-    Solicita al usuario la cantidad de alumnos que desea ingresar
+    Solicita al usuario la cantidad de candidatos que desea ingresar
     y devuelve el valor introducido convertido a un número entero.
 
     Returns:
-        int: La cantidad de alumnos ingresada por el usuario.
+        int: La cantidad de candidatos ingresada por el usuario.
     """
-    numero = int(input("Ingrese el número de alumnos deseado: "))
+    numero = int(input("Ingrese el número de candidatos deseado: "))
 
     return numero
 
 
-def validar_listas_numero_alumnos(numero):
+def validar_listas_numero_candidatos(numero):
     """
-    Valida que la cantidad de alumnos ingresada esté entre 1 y 30.
+    Valida que la cantidad de candidatos ingresada esté entre 1 y 30.
     Si el valor está fuera de ese rango, vuelve a solicitarlo
     hasta que sea válido.
 
     Args:
-        numero (int): Cantidad de alumnos ingresada inicialmente.
+        numero (int): Cantidad de candidatos ingresada inicialmente.
 
     Returns:
-        int: Cantidad de alumnos validada, entre 1 y 30.
+        int: Cantidad de candidatos validada, entre 1 y 30.
     """
     while numero < 1 or numero > 15:
-        print("La cantidad de alumnos ingresada es inválida. Debe utilizar un número entre 1 y 15. Vuelva a intentarlo.")
-        numero = int(input("Ingrese la cantidad de alumnos deseada: "))
+        print("La cantidad de candidatos ingresada es inválida. Debe utilizar un número entre 1 y 15. Vuelva a intentarlo.")
+        numero = int(input("Ingrese la cantidad de candidatos deseada: "))
 
     return numero
 
 
 
-def validar_nombres_alumnos(nombre):
+def validar_nombres_candidatos(nombre):
     """
-    Valida que el nombre de un alumno tenga al menos 5 caracteres
+    Valida que el nombre de un candidato tenga al menos 5 caracteres
     y contenga únicamente letras mayúsculas, minúsculas o espacios.
 
     Args:
-        nombre (str): Nombre del alumno que se desea validar.
+        nombre (str): Nombre del candidato que se desea validar.
 
     Returns:
         bool: True si el nombre es válido, False en caso contrario.
@@ -78,15 +70,15 @@ def validar_nombres_alumnos(nombre):
     return True
 
 
-def cargar_nota_primer_parcial(lista_notas_primer_parcial, i):
+def validar_nota_primer_parcial(lista_notas_primer_parcial, i):
     """
-    Solicita y valida la nota del primer parcial de un alumno.
+    Solicita y valida la nota del primer parcial de un candidato.
     La nota debe ser un número entero entre 0 y 10.
     Si está fuera del rango, vuelve a solicitarla.
 
     Args:
         lista_notas_primer_parcial (list): Lista con las notas del primer parcial.
-        i (int): Índice del alumno cuya nota se desea cargar.
+        i (int): Índice del candidato cuya nota se desea cargar.
 
     Returns:
         None: La nota se guarda directamente en la lista recibida.
@@ -99,15 +91,15 @@ def cargar_nota_primer_parcial(lista_notas_primer_parcial, i):
 
 
 
-def cargar_nota_segundo_parcial(lista_notas_segundo_parcial, i):
+def validar_nota_segundo_parcial(lista_notas_segundo_parcial, i):
     """
-    Solicita y valida la nota del segundo parcial de un alumno.
+    Solicita y valida la nota del segundo parcial de un candidato.
     La nota debe ser un número entero entre 0 y 10.
     Si está fuera del rango, vuelve a solicitarla.
 
     Args:
         lista_notas_segundo_parcial (list): Lista con las notas del segundo parcial.
-        i (int): Índice del alumno cuya nota se desea cargar.
+        i (int): Índice del candidato cuya nota se desea cargar.
 
     Returns:
         None: La nota se guarda directamente en la lista recibida.
