@@ -1,21 +1,24 @@
-from validaciones import (validar_menu, ingresar_numero_alumnos, validar_listas_numero_alumnos, validar_nombres_alumnos, cargar_nota_primer_parcial, cargar_nota_segundo_parcial)
+def main() -> None:
+    """Función principal que gestiona el menú interactivo del sistema escolar."""
+    cantidad = 0
+    nombres = [""]
+    parcial1 = [0]
+    parcial2 = [0]
+    promedios = [0.0]
+    salir = False
 
-from procesamiento import (crear_lista_nombres, crear_lista_notas_primer_parcial, crear_lista_notas_segundo_parcial, ingresar_nombre_alumno, calcular_promedio)
+    # Bucle principal del sistema
+    while not salir:
+        print("\n===== NOTAFÁCIL =====")
+        print("1. Cargar alumnos")
+        print("2. Mostrar listado")
+        print("3. Mostrar estadísticas")
+        print("4. Ver ranking (ordenado)")
+        print("5. Buscar alumno")
+        print("6. Juegos con un nombre")
+        print("0. Salir")
 
-
-def mostrar_menu():
-    """
-    Muestra por pantalla el menú principal del programa NOTITAS.
-    """
-    print(" -.-.-. NOTITAS .-.-.-")
-    print(" ")
-    print("1. Cargar Alumnos.")
-    print("2. Mostrar Listado.")
-    print("3. Mostrar Estadistica.")
-    print("4. Ver Ranking (ORDENADO).")
-    print("5. Buscar Alumno.")
-    print("6. Juegos con un Nombre.")
-    print("0. SALIR.")
+        opcion = validar_entero("Seleccione una opción: ")
 
 
 
@@ -101,8 +104,6 @@ def ejecutar_menu(numero):
 
 
 
-
-
 def main():
     while True:
         mostrar_menu()
@@ -117,10 +118,6 @@ def main():
 
 
     
-
-
-#main()
-
 
 def cargar_alumnos():
 
