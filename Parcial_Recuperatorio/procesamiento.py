@@ -54,7 +54,7 @@ def ingresar_nombre_candidato(nombres, numero): #esto ya esta, tenes que ver que
 
 
 
-def ingresar_notas(lista_notas_prueba_tecnica, lista_notas_prueba_psicotecnica, numero):
+def ingresar_notas(lista_notas_prueba_tecnica, lista_notas_prueba_psicotecnica, numero): #esto esta
 
     for i in range(numero):
 
@@ -74,66 +74,46 @@ def ingresar_notas(lista_notas_prueba_tecnica, lista_notas_prueba_psicotecnica, 
 
         lista_notas_prueba_psicotecnica[i] = nota_prueba_psicotecnica
 
-    return lista_notas_prueba_tecnica, lista_notas_prueba_psicotecnica
+    return lista_notas_prueba_tecnica, lista_notas_prueba_tecnica
 
 
 
-def calcular_promedio(lista_notas_prueba_tecnica, lista_notas_prueba_psicotecnica, numero):
+def calcular_promedio(lista_notas_prueba_tecnica, lista_notas_prueba_psicotecnica, numero): #esto esta
     lista_promedio = [0] * numero
 
     for i in range(numero):
-        lista_promedio[i] = (lista_notas_primer_parcial[i] + lista_notas_segundo_parcial[i]) / 2
+        lista_promedio[i] = (lista_notas_prueba_tecnica[i] + lista_notas_prueba_psicotecnica[i]) / 2
 
     return lista_promedio
 
 
 
 def clasificar_promedios(lista_promedio):
-    """
-    Clasifica a los candidatos según sus promedios en tres categorías:
-    promocionan, aprueban o desaprueban.
 
-    Args:
-        lista_promedio (list): Lista con los promedios de los candidatos.
-
-    Returns:
-        tuple: Cantidad de candidatos que promocionan, aprueban
-        y desaprueban, en ese orden.
-    """
-    contador_promociona = 0
-    contador_aprueba = 0
-    contador_desaprueba = 0
+    contador_contratable = 0
+    contador_revision = 0
+    contador_descartado = 0
 
     for promedio in lista_promedio:
         if promedio >= 6:
-            contador_promociona = contador_promociona + 1
+            contador_contratable = contador_contratable + 1
 
         elif promedio >= 4:
-            contador_aprueba = contador_aprueba + 1
+            contador_revision = contador_revision + 1
 
         else:
-            contador_desaprueba = contador_desaprueba + 1
+            contador_descartado = contador_descartado + 1
 
-    print(f"candidatos que promocionan: {contador_promociona}")
-    print(f"candidatos que aprueban: {contador_aprueba}")
-    print(f"candidatos que desaprueban: {contador_desaprueba}")
+    print(f"Candidatos Contratables: {contador_contratable}")
+    print(f"Candidatos en revisión: {contador_revision}")
+    print(f"Candidatos Descartados: {contador_descartado}")
 
-    return contador_promociona, contador_aprueba, contador_desaprueba
+    return contador_contratable, contador_revision, contador_descartado
 
 
 
-def calcular_prom_gral(lista_promedio, numero):
-    """
-    Calcula el promedio general de todos los candidatos a partir
-    de sus promedios individuales.
+def calcular_prom_gral(lista_promedio, numero): # esto esta
 
-    Args:
-        lista_promedio (list): Lista con los promedios de los candidatos.
-        numero (int): Cantidad de candidatos.
-
-    Returns:
-        float: El promedio general de todos los candidatos.
-    """
     acumulador_promedio = 0
 
     for promedio in lista_promedio:
@@ -145,19 +125,8 @@ def calcular_prom_gral(lista_promedio, numero):
 
 
 
-def calcular_max_min(lista_promedio, lista_nombres):
-    """
-    Busca el promedio máximo y mínimo de los candidatos y los nombres
-    de quienes obtuvieron esos promedios.
+def calcular_max_min(lista_promedio, lista_nombres): #esto esta
 
-    Args:
-        lista_promedio (list): Lista con los promedios de los candidatos.
-        lista_nombres (list): Lista con los nombres de los candidatos.
-
-    Returns:
-        list: Promedio máximo, nombre del candidato con el máximo,
-        promedio mínimo y nombre del candidato con el mínimo.
-    """
     maximo = 0
     minimo = 10
     nombre_maximo = ""

@@ -1,21 +1,21 @@
 from validaciones import validar_menu
-from procesamiento import crear_lista, ingresar_nombre_candidato, ingresar_notas
+from procesamiento import crear_lista, ingresar_nombre_candidato, ingresar_notas, calcular_promedio, calcular_prom_gral, calcular_max_min, clasificar_promedios
 
 def main() -> None:
     """Función principal que gestiona el menú interactivo del sistema escolar."""
-    cantidad = 0
+    cantidad_candidatos = 0
     nombres = [""]
-    parcial1 = [0]
-    parcial2 = [0]
+    nota_prueba_tecnica = [0]
+    nota_prueba_psicotecnica = [0]
     promedios = [0.0]
     salir = False
 
     # Bucle principal del sistema
     while not salir:
         print("TITULO")
-        print("1. Cargar Candidatos.")
-        print("2. Mostrar listado")
-        print("3. Mostrar estadísticas")
+        print("1. Cargar Postulantes. ")
+        print("2. Mostrar Listado General. ")
+        print("3. Mostrar Estadísticas del Proceso. ")
         print("4. Ver ranking (ordenado)")
         print("5. Buscar candidato")
         print("6. Juegos con un nombre")
@@ -28,13 +28,43 @@ def main() -> None:
             case 1:
                 nombres, nota_prueba_tecnica, nota_prueba_psicotecnica = crear_lista()
 
-                nombres = ingresar_nombre_candidato(nombres, len(nombres))
+                nombres = ingresar_nombre_candidato(nombres, cantidad_candidatos)
 
-                nota_prueba_tecnica, nota_prueba_psicotecnica = ingresar_notas(nota_prueba_tecnica, nota_prueba_psicotecnica, len(nombres))
+                nota_prueba_tecnica, nota_prueba_psicotecnica = ingresar_notas(nota_prueba_tecnica, nota_prueba_psicotecnica, cantidad_candidatos)
+
+                promedios = calcular_promedio(nota_prueba_tecnica, nota_prueba_psicotecnica, cantidad_candidatos)
 
 
-if __name__ == "__main__":
-    main()
+            case 2:
+                print(nombres)
+                print(nota_prueba_tecnica)
+                print(nota_prueba_psicotecnica)
+                print(promedios)
+
+            # Y SI NO HAY NINGUNA LISTA CARGADA? TENES QUE MOSTRAR UN MENSAJE.
+
+
+            case 3:
+                promedio_general = calcular_prom_gral(promedios, cantidad_candidatos)
+                print("El promedio general de la camada es:", promedio_general)
+
+
+                maximo, nombre_maximo, minimo, nombre_minimo = calcular_max_min(promedios, nombres)
+                print("Mejor promedio:", maximo)
+                print("Candidato:", nombre_maximo)
+
+                print("Peor promedio:", minimo)
+                print("Candidato:", nombre_minimo)
+
+
+                clasificar_promedios(promedios)
+
+
+
+
+
+    if __name__ == "__main__":
+        main()
 
 
 
