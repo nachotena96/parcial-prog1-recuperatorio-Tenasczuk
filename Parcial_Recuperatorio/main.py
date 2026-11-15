@@ -71,17 +71,16 @@ def main() -> None:
 
 
             case 4:
-                promedio, nombres, prueba_tecnica, prueba_psicotecnica = ordenar_listas(promedio, nombres, prueba_tecnica, prueba_psicotecnica)
-
+                promedios, nombres, nota_prueba_tecnica, nota_prueba_psicotecnica = ordenar_listas(promedios, nombres, nota_prueba_tecnica, nota_prueba_psicotecnica)
                 for i in range(cantidad_postulantes):
-                    print(i + 1, nombres[i], promedio[i])
+                    print(i + 1, nombres[i], promedios[i])
 
 
             case 5:
                 nombre_objetivo = input("Ingrese el nombre del postulante: ")
                 
                 
-                resultado = buscar_nombre(nombre_objetivo, nombres, prueba_tecnica, prueba_psicotecnica, promedio)
+                resultado = buscar_nombre(nombre_objetivo, nombres, nota_prueba_tecnica, nota_prueba_psicotecnica, promedios)
 
 
                 if resultado == -1:
@@ -90,11 +89,11 @@ def main() -> None:
                 else:
                     nota_tecnica = resultado[0]  #Son las posiciones de la lista que devuelve tu función
                     nota_psicotecnica = resultado[1]
-                    promedio = resultado[2]
+                    promedios = resultado[2]
 
                     print(f"Nota técnica: {nota_tecnica}")
                     print(f"Nota psicotécnica: {nota_psicotecnica}")
-                    print(f"Promedio: {promedio}")
+                    print(f"Promedio: {promedios}")
 
 
             case 6:
