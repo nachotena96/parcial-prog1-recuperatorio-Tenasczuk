@@ -1,60 +1,39 @@
-from validaciones import validar_nombres_candidatos, ingresar_y_validar_numero_candidatos, validar_nombres_candidatos, validar_nota
+from validaciones import validar_nombres_postulantes, ingresar_y_validar_numero_postulantes, validar_nombres_postulantes, validar_nota
 
 
-def crear_listas_nombres(numero):
-#pedir numero de candidatos
+def inicializar_listas_postulantes(): #Crea las listas vacías
 
-    for i in range(numero):
-            nombre = input("Ingrese el nombre del candidato: ")
+    cantidad_postulantes = ingresar_y_validar_numero_postulantes()
 
-            while not validar_nombres_candidatos(nombre):
-                print("Nombre del candidato inválido.")
+    lista_nombres = [""] * cantidad_postulantes
+    lista_notas_prueba_tecnica = [0] * cantidad_postulantes
+    lista_notas_prueba_psicotecnica = [0] * cantidad_postulantes
+    lista_promedios = [0.0] * cantidad_postulantes
 
-                nombre = input(f"Ingrese el nombre del candidato {i + 1}: ")
-
-            nombre[i] = nombre
-
+    return cantidad_postulantes, lista_nombres, lista_notas_prueba_tecnica, lista_notas_prueba_psicotecnica, lista_promedios
 
 
 
 
-
-
-
-def crear_lista(): #esto ya esta
-
-    numero = ingresar_y_validar_numero_candidatos()
-
-
-    lista_nombres = [""] * numero
-    lista_notas_primer_parcial = [0] * numero
-    lista_notas_segundo_parcial = [0] * numero
-
-    print(lista_nombres)
-    print(lista_notas_primer_parcial)
-    print(lista_notas_segundo_parcial)
-
-    return lista_nombres, lista_notas_primer_parcial, lista_notas_segundo_parcial
-
-
-
-def ingresar_nombre_candidato(nombres, numero): #esto ya esta, tenes que ver que cuando pones l no te indica "nombre invalido"
+def cargar_nombres_postulantes(nombres, numero): #Solicita y almacena los nombres /// #esto ya esta, tenes que ver que cuando pones l no te indica "nombre invalido"
+#pedir numero de postulantes
 
     for i in range(numero):
+            
+            nombre = input("Ingrese el nombre del postulante: ")
 
-        nombre = input("Ingrese el nombre del candidato: ")
+            while not validar_nombres_postulantes(nombre):
+                print("Nombre del postulante inválido.")
 
-        while not validar_nombres_candidatos(nombre):
-            print("Nombre inválido. Intente nuevamente.")
-            nombre = input("Ingrese el nombre del candidato: ")
+                nombre = input(f"Ingrese el nombre del postulante {i + 1}: ")
 
-    nombres[i] = nombre
+            nombres[i] = nombre  #///La primera variable es un texto y la segunda es la lista que queremos completar.///
 
     return nombres
 
 
 
-def ingresar_notas(lista_notas_prueba_tecnica, lista_notas_prueba_psicotecnica, numero): #esto esta
+def cargar_notas_postulantes(lista_notas_prueba_tecnica, lista_notas_prueba_psicotecnica, numero): #esto esta
 
     for i in range(numero):
 
@@ -78,7 +57,8 @@ def ingresar_notas(lista_notas_prueba_tecnica, lista_notas_prueba_psicotecnica, 
 
 
 
-def calcular_promedio(lista_notas_prueba_tecnica, lista_notas_prueba_psicotecnica, numero): #esto esta
+
+def calcular_promedios_postulantes(lista_notas_prueba_tecnica, lista_notas_prueba_psicotecnica, numero): #esto esta
     lista_promedio = [0] * numero
 
     for i in range(numero):
@@ -88,7 +68,8 @@ def calcular_promedio(lista_notas_prueba_tecnica, lista_notas_prueba_psicotecnic
 
 
 
-def clasificar_promedios(lista_promedio):
+
+def clasificar_promedios(lista_promedio): #esto esta
 
     contador_contratable = 0
     contador_revision = 0
@@ -104,9 +85,9 @@ def clasificar_promedios(lista_promedio):
         else:
             contador_descartado = contador_descartado + 1
 
-    print(f"Candidatos Contratables: {contador_contratable}")
-    print(f"Candidatos en revisión: {contador_revision}")
-    print(f"Candidatos Descartados: {contador_descartado}")
+    print(f"postulantes Contratables: {contador_contratable}")
+    print(f"postulantes en revisión: {contador_revision}")
+    print(f"postulantes Descartados: {contador_descartado}")
 
     return contador_contratable, contador_revision, contador_descartado
 
@@ -146,23 +127,8 @@ def calcular_max_min(lista_promedio, lista_nombres): #esto esta
 
 
 
-def ordenar_listas(lista_promedios, lista_nombres, lista_notas_primer_parcial, lista_notas_segundo_parcial):
-    """
-    Ordena los promedios de mayor a menor y reorganiza las listas
-    de nombres y notas para mantener los datos de cada candidato asociados.
+def ordenar_listas(lista_promedios, lista_nombres, lista_notas_primer_parcial, lista_notas_segundo_parcial): # esto esta
 
-    Args:
-        lista_promedios (list): Lista con los promedios de los candidatos.
-        lista_nombres (list): Lista con los nombres de los candidatos.
-        lista_notas_primer_parcial (list): Notas del primer parcial.
-        lista_notas_segundo_parcial (list): Notas del segundo parcial.
-
-    Returns:
-        list: Lista con los promedios ordenados de mayor a menor.
-        list: Lista de nombres reorganizada.
-        list: Lista de notas del primer parcial reorganizada.
-        list: Lista de notas del segundo parcial reorganizada.
-    """
     n = len(lista_promedios)
 
     for i in range(n):
@@ -189,14 +155,14 @@ def ordenar_listas(lista_promedios, lista_nombres, lista_notas_primer_parcial, l
 
 
 
-def mostrar_ranking_candidatos(lista_promedios, lista_nombres):
+def mostrar_ranking_postulantes(lista_promedios, lista_nombres):
     """
-    Muestra por pantalla la lista de nombres de los candidatos
+    Muestra por pantalla la lista de nombres de los postulantes
     y la lista de sus promedios.
 
     Args:
-        lista_promedios (list): Lista con los promedios de los candidatos.
-        lista_nombres (list): Lista con los nombres de los candidatos.
+        lista_promedios (list): Lista con los promedios de los postulantes.
+        lista_nombres (list): Lista con los nombres de los postulantes.
 
     Returns:
         None: Muestra ambas listas por pantalla.
@@ -206,22 +172,9 @@ def mostrar_ranking_candidatos(lista_promedios, lista_nombres):
 
 
 
-def buscar_nombre(nombre_objetivo, lista_nombres, lista_notas_primer_parcial, lista_notas_segundo_parcial, lista_promedio):
-    """
-    Busca un candidato por su nombre y obtiene sus notas y promedio.
 
-    Args:
-        nombre_objetivo (str): Nombre del candidato que se desea buscar.
-        lista_nombres (list): Lista con los nombres de los candidatos.
-        lista_notas_primer_parcial (list): Notas del primer parcial.
-        lista_notas_segundo_parcial (list): Notas del segundo parcial.
-        lista_promedio (list): Promedios de los candidatos.
+def buscar_nombre(nombre_objetivo, lista_nombres, lista_notas_primer_parcial, lista_notas_segundo_parcial, lista_promedio): #esto ya esta
 
-    Returns:
-        list: Lista con la nota del primer parcial, la nota del segundo
-        parcial y el promedio, si encuentra al candidato.
-        int: -1 si el candidato no existe.
-    """
     for i in range(len(lista_nombres)):
         if nombre_objetivo == lista_nombres[i]:
             nota1 = lista_notas_primer_parcial[i]
@@ -234,21 +187,9 @@ def buscar_nombre(nombre_objetivo, lista_nombres, lista_notas_primer_parcial, li
 
 
 
-def mostrar_notas_y_promedio_candidato(nombre_objetivo, nota1, nota2, promedio):
-    """
-    Muestra por pantalla el nombre del candidato, las notas de ambos
-    parciales y su promedio.
+def mostrar_notas_y_promedio_postulante(nombre_objetivo, nota1, nota2, promedio):
 
-    Args:
-        nombre_objetivo (str): Nombre del candidato.
-        nota1 (int): Nota del primer parcial.
-        nota2 (int): Nota del segundo parcial.
-        promedio (float): Promedio del candidato.
-
-    Returns:
-        None: Muestra los datos por pantalla.
-    """
-    print(f"Nombre del candidato: {nombre_objetivo}")
+    print(f"Nombre del postulante: {nombre_objetivo}")
     print(f"Nota del primer parcial: {nota1}")
     print(f"Nota del segundo parcial: {nota2}")
     print(f"Promedio: {promedio}")
@@ -256,20 +197,11 @@ def mostrar_notas_y_promedio_candidato(nombre_objetivo, nota1, nota2, promedio):
 
 
 def contar_vocales(nombre):
-    """
-    Cuenta la cantidad de vocales que contiene un nombre,
-    considerando vocales minúsculas y mayúsculas.
 
-    Args:
-        nombre (str): Nombre en el que se contarán las vocales.
-
-    Returns:
-        int: Cantidad de vocales encontradas.
-    """
     vocales = "aeiouAEIOU"
     contador = 0
 
-    for i in range(len(nombre)):  # Recorre las letras del nombre
+    for i in range(len(nombre)):  # Recorre el nombre
 
         for j in range(len(vocales)):  # Compara cada letra con las vocales
             if nombre[i] == vocales[j]:
@@ -280,27 +212,13 @@ def contar_vocales(nombre):
 
 
 
-def ingresar_nombre_candidato_juego():
-    """
-    Solicita al usuario el nombre del candidato que desea buscar
-    y devuelve el nombre ingresado.
+def ingresar_nombre_postulante_juego():
 
-    Returns:
-        str: El nombre del candidato que se desea buscar.
-    """
-    nombre_objetivo = input("Ingrese el nombre deseado del candidato: ")
+    nombre_objetivo = input("Ingrese el nombre deseado del postulante: ")
     return nombre_objetivo
 
 
 
 def invertir_nombre(nombre):
-    """
-    Invierte el orden de los caracteres de un nombre.
 
-    Args:
-        nombre (str): Nombre que se desea invertir.
-
-    Returns:
-        str: Nombre con los caracteres en orden inverso.
-    """
     return nombre[::-1]

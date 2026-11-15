@@ -1,9 +1,19 @@
 from validaciones import validar_menu
-from procesamiento import crear_lista, ingresar_nombre_candidato, ingresar_notas, calcular_promedio, calcular_prom_gral, calcular_max_min, clasificar_promedios
+
+from procesamiento import (inicializar_listas_postulantes, cargar_nombres_postulantes, cargar_notas_postulantes, calcular_promedios_postulantes,
+                           
+                            calcular_prom_gral, calcular_max_min, clasificar_promedios,
+
+                            ordenar_listas, 
+                            
+                            buscar_nombre, 
+                            
+                            ingresar_nombre_postulante_juego, contar_vocales, invertir_nombre)
+
 
 def main() -> None:
     """Función principal que gestiona el menú interactivo del sistema escolar."""
-    cantidad_candidatos = 0
+    cantidad_postulantes = 0
     nombres = [""]
     nota_prueba_tecnica = [0]
     nota_prueba_psicotecnica = [0]
@@ -16,9 +26,9 @@ def main() -> None:
         print("1. Cargar Postulantes. ")
         print("2. Mostrar Listado General. ")
         print("3. Mostrar Estadísticas del Proceso. ")
-        print("4. Ver ranking (ordenado)")
-        print("5. Buscar candidato")
-        print("6. Juegos con un nombre")
+        print("4. Ver Ranking Postulantes (ordenado)")
+        print("5. Buscar Postulante")
+        print("6. Analizar Nombre de postulante")
         print("0. Salir")
 
         opcion = validar_menu("Seleccione una opción del menu: ")
@@ -26,13 +36,13 @@ def main() -> None:
 
         match opcion:
             case 1:
-                nombres, nota_prueba_tecnica, nota_prueba_psicotecnica = crear_lista()
+                cantidad_postulantes, nombres, nota_prueba_tecnica, nota_prueba_psicotecnica, promedios = inicializar_listas_postulantes()
 
-                nombres = ingresar_nombre_candidato(nombres, cantidad_candidatos)
+                nombres = cargar_nombres_postulantes(nombres, cantidad_postulantes)
 
-                nota_prueba_tecnica, nota_prueba_psicotecnica = ingresar_notas(nota_prueba_tecnica, nota_prueba_psicotecnica, cantidad_candidatos)
+                nota_prueba_tecnica, nota_prueba_psicotecnica = cargar_notas_postulantes(nota_prueba_tecnica, nota_prueba_psicotecnica, cantidad_postulantes)
 
-                promedios = calcular_promedio(nota_prueba_tecnica, nota_prueba_psicotecnica, cantidad_candidatos)
+                promedios = calcular_promedios_postulantes(nota_prueba_tecnica, nota_prueba_psicotecnica, cantidad_postulantes)
 
 
             case 2:
@@ -45,149 +55,68 @@ def main() -> None:
 
 
             case 3:
-                promedio_general = calcular_prom_gral(promedios, cantidad_candidatos)
+                promedio_general = calcular_prom_gral(promedios, cantidad_postulantes)
                 print("El promedio general de la camada es:", promedio_general)
 
 
                 maximo, nombre_maximo, minimo, nombre_minimo = calcular_max_min(promedios, nombres)
                 print("Mejor promedio:", maximo)
-                print("Candidato:", nombre_maximo)
+                print("postulante:", nombre_maximo)
 
                 print("Peor promedio:", minimo)
-                print("Candidato:", nombre_minimo)
+                print("postulante:", nombre_minimo)
 
 
                 clasificar_promedios(promedios)
 
 
+            case 4:
+                promedio, nombres, prueba_tecnica, prueba_psicotecnica = ordenar_listas(promedio, nombres, prueba_tecnica, prueba_psicotecnica)
+
+                for i in range(cantidad_postulantes):
+                    print(i + 1, nombres[i], promedio[i])
+
+
+            case 5:
+                nombre_objetivo = input("Ingrese el nombre del postulante: ")
+                
+                
+                resultado = buscar_nombre(nombre_objetivo, nombres, prueba_tecnica, prueba_psicotecnica, promedio)
+
+
+                if resultado == -1:
+                    print("El postulante no se encuentra registrado. ")
+
+                else:
+                    nota_tecnica = resultado[0]  #Son las posiciones de la lista que devuelve tu función
+                    nota_psicotecnica = resultado[1]
+                    promedio = resultado[2]
+
+                    print(f"Nota técnica: {nota_tecnica}")
+                    print(f"Nota psicotécnica: {nota_psicotecnica}")
+                    print(f"Promedio: {promedio}")
+
+
+            case 6:
+                nombre_objetivo = ingresar_nombre_postulante_juego()
+
+                cantidad_vocales = contar_vocales(nombre_objetivo)
+                nombre_invertido = invertir_nombre(nombre_objetivo)
+
+                print(f"Cantidad de vocales: {cantidad_vocales}")
+                print(f"Nombre invertido: {nombre_invertido}")
+
+
+            case 0:
+                print("Saliendo del Programa...")
+                salir = True
+
+
+            case _:
+                print("Opción inválida. Por favor, seleccione una opción correcta. (0 - 6)")
+                  
 
 
 
-    if __name__ == "__main__":
+if __name__ == "__main__":
         main()
-
-
-
-
-#def pedir_numero():
-    #"""
-    #Solicita al usuario que ingrese un número entero y lo devuelve.
-#
-    #Returns:
-        #int: El número ingresado por el usuario.
-    #"""
-    #numero = int(input("Ingrese un número: "))
-#
-    #return numero
-#
-#
-#
-#
-#
-#def ejecutar_menu(numero):
-    #"""
-    #Ejecuta la opción seleccionada por el usuario mediante una estructura
-    #match-case y muestra un mensaje correspondiente a cada opción.
-#
-    #Args:
-        #numero (int): Opción del menú seleccionada por el usuario.
-#
-    #Returns:
-        #None: La función muestra mensajes por pantalla, pero no devuelve
-        #ningún valor.
-    #"""
-    #match numero:
-        #case 1:
-            #print('Usted ha ingresado a "Cargar candidatos".')
-#
-        #case 2:
-            #print('Usted ha ingresado a "Mostrar Listado".')
-#
-        #case 3:
-            #print('Usted ha ingresado a "Mostrar Estadística".')
-#
-        #case 4:
-            #print('Usted ha ingresado a "Ver Ranking (ORDENADO)".')
-#
-        #case 5:
-            #print('Usted ha ingresado a "Buscar candidato".')
-#
-        #case 6:
-            #print('Usted ha ingresado a "Juegos con un Nombre".')
-#
-        #case 0:
-            #print("Saliendo del programa. Gracias por elegirnos.")
-#
-    #return numero
-#
-#
-#
-#
-#
-#def ejecutar_menu(numero):
-    #print(f"DEBUG ejecutar_menu: {numero}")
-#
-    #match numero:
-                #case 1:
-                    #print('Usted ha ingresado a "Cargar candidatos".')
-#
-                #case 2:
-                    #print('Usted ha ingresado a "Mostrar Listado".')
-#
-                #case 3:
-                    #print('Usted ha ingresado a "Mostrar Estadística".')
-#
-                #case 4:
-                    #print('Usted ha ingresado a "Ver Ranking (ORDENADO)".')
-#
-                #case 5:
-                    #print('Usted ha ingresado a "Buscar candidato".')
-#
-                #case 6:
-                    #print('Usted ha ingresado a "Juegos con un Nombre".')
-#
-                #case 0:
-                    #print("Saliendo del programa. Gracias por elegirnos.")
-#
-#
-#
-#def main():
-    #while True:
-        #mostrar_menu()
-#
-        #opcion = int(input("Ingrese la opción del menú que desee: "))
-        #opcion = validar_menu(opcion)
-#
-        #ejecutar_menu(opcion)
-#
-        #if opcion == 0:
-            #break
-#
-#
-#    
-#
-#def cargar_candidatos():
-#
-    #numero_candidatos = ingresar_numero_candidatos()
-    #numero_candidatos = validar_listas_numero_candidatos(numero_candidatos)
-#
-    #nombres = crear_lista_nombres(numero_candidatos)
-    #notas1 = crear_lista_notas_primer_parcial(numero_candidatos)
-    #notas2 = crear_lista_notas_segundo_parcial(numero_candidatos)
-#
-    #for i in range(numero_candidatos):
-#
-        #nombre_candidato = input("Ingrese el nombre del candidato: ")
-#
-        #while not validar_nombres_candidatos(nombre_candidato):
-            #print("Nombre inválido. Debe tener al menos 5 caracteres y contener solamente letras y espacios.")
-            #nombre_candidato = input("Ingrese el nombre del candidato: ")
-#
-        #nombres[i] = nombre_candidato
-#
-        #cargar_nota_primer_parcial(notas1, i)
-        #cargar_nota_segundo_parcial(notas2, i)
-#
-#
-#
-#cargar_candidatos()

@@ -10,19 +10,19 @@ def validar_menu(numero):
 
 
 
-def ingresar_y_validar_numero_candidatos(): #esto esta
+def ingresar_y_validar_numero_postulantes(): #esto esta
 
-    numero = int(input("Ingrese la cantidad de candidatos deseada (1 - 15): "))
+    numero = int(input("Ingrese la cantidad de postulantes deseada (1 - 15): "))
 
     while numero < 1 or numero > 15:
-        print("La cantidad de candidatos ingresada es inválida. Debe utilizar un número entre 1 y 15. Vuelva a intentarlo.")
-        numero = int(input("Ingrese la cantidad de candidatos deseada: "))
+        print("La cantidad de postulantes ingresada es inválida. Debe utilizar un número entre 1 y 15. Vuelva a intentarlo.")
+        numero = int(input("Ingrese la cantidad de postulantes deseada: "))
 
     return numero
 
 
 
-def validar_nombres_candidatos(nombre):
+def validar_nombres_postulantes(nombre):
 
     if len(nombre) < 5:
         return False
@@ -50,13 +50,13 @@ def validar_nota(nota):
 
 #def validar_nota_segundo_parcial(lista_notas_segundo_parcial, i):
     #"""
-    #Solicita y valida la nota del segundo parcial de un candidato.
+    #Solicita y valida la nota del segundo parcial de un postulante.
     #La nota debe ser un número entero entre 0 y 10.
     #Si está fuera del rango, vuelve a solicitarla.
 #
     #Args:
         #lista_notas_segundo_parcial (list): Lista con las notas del segundo parcial.
-        #i (int): Índice del candidato cuya nota se desea cargar.
+        #i (int): Índice del postulante cuya nota se desea cargar.
 #
     #Returns:
         #None: La nota se guarda directamente en la lista recibida.
