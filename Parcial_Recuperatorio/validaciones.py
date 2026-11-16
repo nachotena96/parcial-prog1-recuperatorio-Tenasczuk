@@ -48,22 +48,10 @@ def validar_nota(nota):
 
 
 
-#def validar_nota_segundo_parcial(lista_notas_segundo_parcial, i):
-    #"""
-    #Solicita y valida la nota del segundo parcial de un postulante.
-    #La nota debe ser un número entero entre 0 y 10.
-    #Si está fuera del rango, vuelve a solicitarla.
-#
-    #Args:
-        #lista_notas_segundo_parcial (list): Lista con las notas del segundo parcial.
-        #i (int): Índice del postulante cuya nota se desea cargar.
-#
-    #Returns:
-        #None: La nota se guarda directamente en la lista recibida.
-    #"""
-    #lista_notas_segundo_parcial[i] = int(input("Ingrese la nota del segundo parcial: "))
-#
-    #while lista_notas_segundo_parcial[i] < 0 or lista_notas_segundo_parcial[i] > 10:
-        #print("El valor ingresado es inválido. Debe utilizar un número entre 0 y 10. Vuelva a intentarlo.")
-        #lista_notas_segundo_parcial[i] = int(input("Ingrese la nota del segundo parcial: "))
+def cantidad_listas(cantidad: int) -> bool:
+    if cantidad == 0:
+        print("Usted no tiene listas cargadas, primero debe registrar los alumnos. Ingrese 1 para el registro, o presione 0 para salir del menu ")
+        return False
+        
+    return True
 

@@ -1,4 +1,4 @@
-from validaciones import validar_menu
+from validaciones import validar_menu, cantidad_listas
 
 from procesamiento import (inicializar_listas_postulantes, cargar_nombres_postulantes, cargar_notas_postulantes, calcular_promedios_postulantes,
                            
@@ -22,7 +22,7 @@ def main() -> None:
 
     # Bucle principal del sistema
     while not salir:
-        print("TITULO")
+        print("GESTIÓN DE ENTREVISTAS")
         print("1. Cargar Postulantes. ")
         print("2. Mostrar Listado General. ")
         print("3. Mostrar Estadísticas del Proceso. ")
@@ -46,64 +46,69 @@ def main() -> None:
 
 
             case 2:
-                print(nombres)
-                print(nota_prueba_tecnica)
-                print(nota_prueba_psicotecnica)
-                print(promedios)
+                if cantidad_listas(cantidad_postulantes):
+                    print(nombres)
+                    print(nota_prueba_tecnica)
+                    print(nota_prueba_psicotecnica)
+                    print(promedios)
 
             # Y SI NO HAY NINGUNA LISTA CARGADA? TENES QUE MOSTRAR UN MENSAJE.
 
 
             case 3:
-                promedio_general = calcular_prom_gral(promedios, cantidad_postulantes)
-                print("El promedio general de la camada es:", promedio_general)
+                if cantidad_listas(cantidad_postulantes):
+                    promedio_general = calcular_prom_gral(promedios, cantidad_postulantes)
+                    print("El promedio general de la camada es:", promedio_general)
 
 
-                maximo, nombre_maximo, minimo, nombre_minimo = calcular_max_min(promedios, nombres)
-                print("Mejor promedio:", maximo)
-                print("postulante:", nombre_maximo)
+                    maximo, nombre_maximo, minimo, nombre_minimo = calcular_max_min(promedios, nombres)
+                    print("Mejor promedio:", maximo)
+                    print("postulante:", nombre_maximo)
 
-                print("Peor promedio:", minimo)
-                print("postulante:", nombre_minimo)
+                    print("Peor promedio:", minimo)
+                    print("postulante:", nombre_minimo)
 
 
-                clasificar_promedios(promedios)
+                    clasificar_promedios(promedios)
 
 
             case 4:
-                promedios, nombres, nota_prueba_tecnica, nota_prueba_psicotecnica = ordenar_listas(promedios, nombres, nota_prueba_tecnica, nota_prueba_psicotecnica)
-                for i in range(cantidad_postulantes):
-                    print(i + 1, nombres[i], promedios[i])
+                if cantidad_listas(cantidad_postulantes):
+                    promedios, nombres, nota_prueba_tecnica, nota_prueba_psicotecnica = ordenar_listas(promedios, nombres, nota_prueba_tecnica, nota_prueba_psicotecnica)
+                    for i in range(cantidad_postulantes):
+                        print(i + 1, nombres[i], promedios[i])
 
 
             case 5:
-                nombre_objetivo = input("Ingrese el nombre del postulante: ")
+                if cantidad_listas(cantidad_postulantes):
+                    nombre_objetivo = input("Ingrese el nombre del postulante: ")
                 
                 
-                resultado = buscar_nombre(nombre_objetivo, nombres, nota_prueba_tecnica, nota_prueba_psicotecnica, promedios)
+                    resultado = buscar_nombre(nombre_objetivo, nombres, nota_prueba_tecnica, nota_prueba_psicotecnica, promedios)
 
 
-                if resultado == -1:
-                    print("El postulante no se encuentra registrado. ")
+                    if resultado == -1:
+                        print("El postulante no se encuentra registrado. ")
 
-                else:
-                    nota_tecnica = resultado[0]  #Son las posiciones de la lista que devuelve tu función
-                    nota_psicotecnica = resultado[1]
-                    promedios = resultado[2]
+                    else:
+                        nota_tecnica = resultado[0]  #Son las posiciones de la lista que devuelve tu función
+                        nota_psicotecnica = resultado[1]
+                        promedios = resultado[2]
 
-                    print(f"Nota técnica: {nota_tecnica}")
-                    print(f"Nota psicotécnica: {nota_psicotecnica}")
-                    print(f"Promedio: {promedios}")
+                        print(f"Nota técnica: {nota_tecnica}")
+                        print(f"Nota psicotécnica: {nota_psicotecnica}")
+                        print(f"Promedio: {promedios}")
 
 
             case 6:
-                nombre_objetivo = ingresar_nombre_postulante_juego()
+                if cantidad_listas(cantidad_postulantes):
+                    nombre_objetivo = ingresar_nombre_postulante_juego()
 
-                cantidad_vocales = contar_vocales(nombre_objetivo)
-                nombre_invertido = invertir_nombre(nombre_objetivo)
+                    cantidad_vocales = contar_vocales(nombre_objetivo)
+                    nombre_invertido = invertir_nombre(nombre_objetivo)
 
-                print(f"Cantidad de vocales: {cantidad_vocales}")
-                print(f"Nombre invertido: {nombre_invertido}")
+                    print(f"Cantidad de vocales: {cantidad_vocales}")
+                    print(f"Nombre invertido: {nombre_invertido}")
 
 
             case 0:
