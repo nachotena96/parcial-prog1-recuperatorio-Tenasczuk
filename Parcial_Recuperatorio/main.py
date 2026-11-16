@@ -11,8 +11,14 @@ from procesamiento import (inicializar_listas_postulantes, cargar_nombres_postul
                             ingresar_nombre_postulante_juego, contar_vocales, invertir_nombre)
 
 
+
 def main() -> None:
-    """Función principal que gestiona el menú interactivo del sistema escolar."""
+    """
+    Función principal del programa. Inicializa las variables necesarias
+    y gestiona el menú interactivo para realizar las operaciones
+    relacionadas con el registro y evaluación de postulantes.
+    """
+
     cantidad_postulantes = 0
     nombres = [""]
     nota_prueba_tecnica = [0]
@@ -20,8 +26,8 @@ def main() -> None:
     promedios = [0.0]
     salir = False
 
-    # Bucle principal del sistema
-    while not salir:
+
+    while not salir:        # Bucle principal del sistema
         print("GESTIÓN DE ENTREVISTAS")
         print("1. Cargar Postulantes. ")
         print("2. Mostrar Listado General. ")
@@ -45,6 +51,7 @@ def main() -> None:
                 promedios = calcular_promedios_postulantes(nota_prueba_tecnica, nota_prueba_psicotecnica, cantidad_postulantes)
 
 
+
             case 2:
                 if cantidad_listas(cantidad_postulantes):
                     print(nombres)
@@ -52,7 +59,6 @@ def main() -> None:
                     print(nota_prueba_psicotecnica)
                     print(promedios)
 
-            # Y SI NO HAY NINGUNA LISTA CARGADA? TENES QUE MOSTRAR UN MENSAJE.
 
 
             case 3:
@@ -72,11 +78,13 @@ def main() -> None:
                     clasificar_promedios(promedios)
 
 
+
             case 4:
                 if cantidad_listas(cantidad_postulantes):
                     promedios, nombres, nota_prueba_tecnica, nota_prueba_psicotecnica = ordenar_listas(promedios, nombres, nota_prueba_tecnica, nota_prueba_psicotecnica)
                     for i in range(cantidad_postulantes):
                         print(i + 1, nombres[i], promedios[i])
+
 
 
             case 5:
@@ -100,6 +108,7 @@ def main() -> None:
                         print(f"Promedio: {promedios}")
 
 
+
             case 6:
                 if cantidad_listas(cantidad_postulantes):
                     nombre_objetivo = ingresar_nombre_postulante_juego()
@@ -109,6 +118,7 @@ def main() -> None:
 
                     print(f"Cantidad de vocales: {cantidad_vocales}")
                     print(f"Nombre invertido: {nombre_invertido}")
+
 
 
             case 0:
@@ -122,5 +132,5 @@ def main() -> None:
 
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":      # ejecuta la función principal únicamente cuando el archivo se inicia directamente.
         main()
